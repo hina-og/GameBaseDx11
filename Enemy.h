@@ -4,18 +4,18 @@
 class Enemy
 	: public GameObject
 {
+	int hModel_;
+	float moveSpeed;
+	bool canMove;
 public:
 	Enemy(GameObject* parent);
 
 	void Initialize();
 
-	//XV
 	void Update();
 
-	//•`‰æ
 	void Draw();
 
-	//ŠJ•ú
 	void Release();
 };
 

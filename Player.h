@@ -6,8 +6,7 @@ class Player
 {
 	int hModel_;
 	XMFLOAT3 cameraPos_{0,0,0};
-	bool pushL;
-	bool pushR;
+	bool isMove;
 public:
 	Player(GameObject* parent);
 
