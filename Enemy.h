@@ -5,8 +5,8 @@ class Enemy
 	: public GameObject
 {
 	int hModel_;
-	float moveSpeed;
-	bool canMove;
+	float moveSpeed_;
+	bool canMove_;
 public:
 	Enemy(GameObject* parent);
 
@@ -17,5 +17,7 @@ public:
 	void Draw();
 
 	void Release();
+
+	void SetSpeed(float _speed);
 };
 

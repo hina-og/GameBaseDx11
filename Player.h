@@ -6,7 +6,7 @@ class Player
 {
 	int hModel_;
 	XMFLOAT3 cameraPos_{0,0,0};
-	bool isMove;
+	bool canMove;
 public:
 	Player(GameObject* parent);
 
@@ -20,5 +20,7 @@ public:
 
 	//ŠJ•ú
 	void Release();
+
+	void OnCollision(GameObject* pTarget) override;
 };
 

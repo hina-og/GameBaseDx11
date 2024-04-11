@@ -2,15 +2,18 @@
 #include "Engine/GameObject.h"
 
 //テストシーンを管理するクラス
-class TestScene : public GameObject
+class PlayScene 
+	: public GameObject
 {
 	int i = 0;
 	int j = 0;
-	int rand_;
+	XMFLOAT3 enemypos_;
+	float speed_;
+	float speedRate_;
 public:
 	//コンストラクタ
 	//引数：parent  親オブジェクト（SceneManager）
-	TestScene(GameObject* parent);
+	PlayScene(GameObject* parent);
 
 	//初期化
 	void Initialize() override;

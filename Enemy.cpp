@@ -8,28 +8,31 @@ Enemy::Enemy(GameObject* parent)
 	hModel_ = Model::Load("Model\\Enemy.fbx");
 	assert(hModel_ >= 0);
 	transform_.position_ = { 0,-5,-10 };
-	moveSpeed = 0.1;
-	canMove = false;
+	moveSpeed_ = 0.1;
+	canMove_ = false;
 }
 
 void Enemy::Initialize()
 {
+	transform_.position_.x = (float)(rand() % 3 - 1);
+	SphereCollider* collider = new SphereCollider(XMFLOAT3(0, 0.5, 0), 0.45);
+	AddCollider(collider);
 }
 
 void Enemy::Update()
 {
-	if (canMove)
+	if (canMove_)
 	{
-		transform_.position_.z += moveSpeed;
+		transform_.position_.z += moveSpeed_;
 	}
 	if (transform_.position_.y >= 0)
 	{
 		transform_.position_.y = 0;
-		canMove = true;
+		canMove_ = true;
 	}
 	else
 	{
-		transform_.position_.y += moveSpeed;
+		transform_.position_.y += moveSpeed_;
 	}
 	if (transform_.position_.z > 3)
 	{
@@ -45,4 +48,9 @@ void Enemy::Draw()
 
 void Enemy::Release()
 {
+}
+
+void Enemy::SetSpeed(float _speed)
+{
+	moveSpeed_ = _speed;
 }

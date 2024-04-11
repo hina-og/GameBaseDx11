@@ -8,14 +8,17 @@
 Player::Player(GameObject* parent)
 	:GameObject(parent, "Player"), hModel_(-1)
 {
+	hModel_ = Model::Load("Model\\player.fbx");
+	assert(hModel_ >= 0);
+	transform_.position_ = { 0,0,0 };
+	canMove = false;
 }
 
 void Player::Initialize()
 {
-	hModel_ = Model::Load("Model\\player.fbx");
-	assert(hModel_ >= 0);
-	transform_.position_ = { 0,0,0 };
-	isMove = false;
+	
+	SphereCollider* collider = new SphereCollider(XMFLOAT3(0, 0.5, 0), 0.45);
+	AddCollider(collider);
 }
 
 void Player::Update()
@@ -23,26 +26,24 @@ void Player::Update()
 	
 	if (Input::IsKey(DIK_RIGHT))
 	{
-		if (transform_.position_.x >= 0 && !isMove)
+		if (transform_.position_.x >= 0 && !canMove)
 		{
 			transform_.position_.x -= 1;
 		}
-		isMove = true;
+		canMove = true;
 	}
 	else if (Input::IsKey(DIK_LEFT))
 	{
-		if (transform_.position_.x < 1 && !isMove)
+		if (transform_.position_.x < 1 && !canMove)
 		{
 			transform_.position_.x += 1;
 		}
-		isMove = true;
+		canMove = true;
 	}
 	else
 	{
-		isMove = false;
+		canMove = false;
 	}
-	//SphereCollider* collision = new SphereCollider(transform_.position_.x, transform_.position_.y + 0.5f, transform_.position_.z, 0.5f);
-	//AddCollider(collision);
 
 	cameraPos_ = { transform_.position_.x + 0, transform_.position_.y + 2 ,transform_.position_.z + 4 };
 	Camera::SetPosition(cameraPos_);
@@ -57,4 +58,12 @@ void Player::Draw()
 
 void Player::Release()
 {
+}
+
+void Player::OnCollision(GameObject* pTarget)
+{
+	if (pTarget->GetObjectName() == "Enemy")
+	{
+		KillMe();
+	}
 }

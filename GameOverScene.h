@@ -1,14 +1,11 @@
 #pragma once
 #include "Engine/GameObject.h"
-
-class Road
+class GameOverScene 
 	: public GameObject
 {
-	int hModel_;
-	float moveSpeed_;
-	bool canMove_;
+	int hPict_;
 public:
-	Road(GameObject* parent);
+	GameOverScene(GameObject* parent);
 
 	void Initialize();
 
@@ -17,7 +14,5 @@ public:
 	void Draw();
 
 	void Release();
-
-	void SetSpeed(float _speed);
 };
 
